@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Введите данные о Человеке</h1>
+    Имя: <input type="text" id="pName" required>
+    <br>
+    <br>
+    Возраст: <input type="text" onblur="checkAge()" id="pAge" required>
+    <p id="answer"></p>
+
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+
+    <h1>Введите данные об Автомобиле</h1>
+    Модель авто: <input type="text" id="cName" required>
+    <br>
+    <br>
+    Цвет автомобиля: <input type="text" id="cColor" required>
+    <br>
+    <br>
+    Год выпуска: <input type="text" id="cYear" required>
+
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+
+    <button onclick="infoAbout()">Вывести всю информацию!</button>
+
+
+
+
+    <script>
+
+        function infoAbout() {
+            let pName = document.getElementById('pName').value;
+            let pAge = document.getElementById('pAge').value;
+            let cName = document.getElementById('cName').value;
+            let cColor = document.getElementById('cColor').value;
+            let cYear = document.getElementById('cYear').value;
+
+            let user = new User(pName, pAge);
+            user.displayInfo();
+
+            let car = new Car(cName, cColor, cYear);
+            car.getCarInfo();
+            car.carOwner(user);
+
+        }
+
+        function checkAge() {
+            let age = document.getElementById('pAge');
+            let result = document.getElementById('answer');
+            if(parseInt(age.value) >= 18) {
+                result.innerHTML = "Вы достаточно взрослый для управления автомобилем.";
+            }
+            else {
+                result.innerHTML = "Вы НЕ достаточно взрослый для управления автомобилем.";
+            }
+        }
+
+        function User(pName, pAge) {
+            this.name = pName;
+            this.age = pAge;
+            this.displayInfo = function() {
+                alert("Имя: " + this.name + ";  Возраст: " + this.age);
+            }
+        }
+
+        function Car(cName, cColor, cYear) {
+            this.name = cName;
+            this.color = cColor;
+            this.year = cYear;
+            this.getCarInfo = function() {
+                alert("Модель: " + this.name + "; Цвет авто: " + this.color + "; Год выпуска: " + this.year);
+            }
+            this.carOwner = function(user) {
+                this.nameUser = user.name;
+                this.ageUser = user.age;
+                alert(this.nameUser + " владелец машины!" + " Его возраст: " + this.ageUser);
+            }
+        }
+    </script>
+</body>
+</html>
